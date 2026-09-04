@@ -1,16 +1,19 @@
 from django.contrib import admin
-from django.urls import path, include
-from complaints import views  # ya aapka home page jis view me hai
+from django.urls import path
+from complaints import views
 
 urlpatterns = [
+    # Admin Panel (RePuP Desk)
     path('admin/', admin.site.urls),
-    
-    # Root path ("") ko home page par point karein:
-    path('', views.home, name='home'),  
-    
-    # Login page ke liye alag se URL banayein:
+
+    # Direct Dashboard Root URL
+    path('', views.dashboard, name='dashboard'),
+
+    # Optional Login/Logout agar baad me zaroorat pade
     path('login/', views.login_view, name='login'),
-    
-    # Baki URLs
+    path('logout/', views.logout_view, name='logout'),
+
+    # Complaint Management
     path('raise/', views.raise_complaint, name='raise_complaint'),
+    path('complaint/<int:pk>/', views.complaint_detail, name='complaint_detail'),
 ]
