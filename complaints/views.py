@@ -7,7 +7,6 @@ from django.db.models import Q
 from .models import Complaint, Category
 
 # User Dashboard (Protected)
-@login_required
 def dashboard(request):
     search_query = request.GET.get('q', '').strip()
     status_filter = request.GET.get('status', '').strip()
@@ -41,7 +40,6 @@ def dashboard(request):
     return render(request, 'complaints/dashboard.html', context)
 
 # Raise Complaint Form (Protected)
-@login_required
 def raise_complaint(request):
     if request.method == 'POST':
         name = request.POST.get('complainant_name')
